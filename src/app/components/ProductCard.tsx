@@ -7,24 +7,12 @@ import {
     StyleSheet,
 } from "react-native";
 
-import { Ionicons } from "@react-native-vector-icons/ionicons/static";
-
-
 import { faPlus, faHeart as fh } from '@fortawesome/free-solid-svg-icons/';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons/';
 import { useState } from "react";
+import { ProductCardProps } from "../navigation/types";
 
-type ProductCardProps = {
-    product: {
-        id: string;
-        name: string;
-        price: number;
-        image: string;
-    };
-    onAdd?: (product: any) => void;
-    onFavorite?: (product: any) => void;
-};
 
 function toggle(onFavorite?: (product: any) => void, product?: any, favorite?: boolean) {
     onFavorite?.(product)
@@ -37,6 +25,7 @@ export default function ProductCard({
     product,
     onAdd,
     onFavorite,
+    onPress
 }: ProductCardProps) {
 
     let isFavorite = false;
@@ -57,25 +46,30 @@ export default function ProductCard({
             </Pressable>
 
             {/* Product image */}
-            <View style={styles.imageContainer}>
-                <Image
-                    source={{ uri: product.image }}
-                    style={styles.image}
-                    resizeMode="contain"
-                />
-            </View>
-
-            {/* Product information */}
-            <Text
-                style={styles.name}
-                numberOfLines={1}
+            <Pressable
+                accessibilityRole="button"
+                onPress={() => onPress?.(product)}
             >
-                {product.name}
-            </Text>
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={{ uri: product.image }}
+                        style={styles.image}
+                        resizeMode="contain"
+                    />
+                </View>
 
-            <Text style={styles.price}>
-                ₹{product.price}
-            </Text>
+                {/* Product information */}
+                <Text
+                    style={styles.name}
+                    numberOfLines={1}
+                >
+                    {product.name}
+                </Text>
+
+                <Text style={styles.price}>
+                    ₹{product.price}
+                </Text>
+            </Pressable>
 
             {/* Add button */}
             <Pressable

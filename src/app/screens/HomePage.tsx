@@ -3,16 +3,15 @@ import {
   Alert,
   Image,
   Pressable,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
-  Dimensions,
   Text,
   View
 } from "react-native";
 
 import { Ionicons } from "@react-native-vector-icons/ionicons/static";
 import { useMemo, useState } from "react";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import ProductCard from "../components/ProductCard";
 
 import {
@@ -22,26 +21,9 @@ import {
 import CategoryCard from "../components/CategoryCard";
 import LocationHeader from "../components/LocationHeaders";
 import SearchBar from "../components/SearchBar";
+import type { AppStackParamList, CategoryCardProps, ProductProps } from "../navigation/types";
 
-type HomeScreenProps = {
-  navigation: {
-    replace: (screen: string) => void
-  }
-}
-
-type CategoryCardProps = {
-    id: string;
-    name: string;
-    image: string;
-  };
-
-type ProductProps = {
-    id: string;
-    name: string;
-    price: number;
-    image: string;
-};
-const { width, height } = Dimensions.get("window");
+type HomeScreenProps = NativeStackScreenProps<AppStackParamList, "home">;
 
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
@@ -87,143 +69,148 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
   return (
     // <SafeAreaView style={styles.safeArea}>
 
-      <View style={styles.container}>
+    <View style={styles.container}>
 
-        {/* Header */}
-        <LocationHeader
-          onLocationPress={handleLocationPress}
-        />
+      {/* Header */}
+      <LocationHeader
+        onLocationPress={handleLocationPress}
+      />
 
-        {/* Search */}
-        <SearchBar
-          value={search}
-          onChangeText={setSearch}
-        />
+      {/* Search */}
+      <SearchBar
+        value={search}
+        onChangeText={setSearch}
+      />
 
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.content}
-        >
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.content}
+      >
 
-          {/* Hero banner */}
-          <Pressable style={styles.hero}>
+        {/* Hero banner */}
+        <Pressable style={styles.hero}>
 
-            <View style={styles.heroContent}>
+          <View style={styles.heroContent}>
 
-              <Text style={styles.heroTitle}>
-                Fresh essentials{"\n"}
-                delivered to your home
+            <Text style={styles.heroTitle}>
+              Fresh essentials{"\n"}
+              delivered to your home
+            </Text>
+
+            <Pressable style={styles.shopButton}>
+              <Text style={styles.shopButtonText}>
+                Shop Now
               </Text>
 
-              <Pressable style={styles.shopButton}>
-                <Text style={styles.shopButtonText}>
-                  Shop Now
-                </Text>
+              <Ionicons
+                name="arrow-forward"
+                size={14}
+                color="#FFFFFF"
+              />
+            </Pressable>
 
-                <Ionicons
-                  name="arrow-forward"
-                  size={14}
-                  color="#FFFFFF"
-                />
-              </Pressable>
+          </View>
 
-            </View>
+          <Image
+            source={require("../../../assets/images/bannerHero.png")}
+            style={styles.heroImage}
+            resizeMode="cover"
+          />
 
-            <Image
-              source={require("../../../assets/images/bannerHero.png")}
-              style={styles.heroImage}
-              resizeMode="cover"
-            />
+        </Pressable>
 
+
+        {/* Categories */}
+        <View style={styles.sectionHeader}>
+
+          <Text style={styles.sectionTitle}>
+            Categories
+          </Text>
+
+          <Pressable>
+            <Text style={styles.seeAll}>
+              See all
+            </Text>
           </Pressable>
 
+        </View>
 
-          {/* Categories */}
-          <View style={styles.sectionHeader}>
-
-            <Text style={styles.sectionTitle}>
-              Categories
-            </Text>
-
-            <Pressable>
-              <Text style={styles.seeAll}>
-                See all
-              </Text>
-            </Pressable>
-
-          </View>
-
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.categoryList}
-          >
-            {categories.map((category) => (
-              <CategoryCard
-                key={category.id}
-                category={category}
-                onPress={handleCategoryPress}
-              />
-            ))}
-          </ScrollView>
-
-
-          {/* Products */}
-          <View style={styles.sectionHeader}>
-
-            <Text style={styles.sectionTitle}>
-              Popular Products
-            </Text>
-
-            <Pressable>
-              <Text style={styles.seeAll}>
-                See all
-              </Text>
-            </Pressable>
-
-          </View>
-
-
-          {filteredProducts.length === 0 ? (
-
-            <View style={styles.empty}>
-              <Ionicons
-                name="search-outline"
-                size={35}
-                color="#89918B"
-              />
-
-              <Text style={styles.emptyText}>
-                No products found
-              </Text>
-            </View>
-
-          ) : (
-
-            <View style={styles.productGrid}>
-
-              {filteredProducts.map((product) => (
-
-                <View
-                  key={product.id}
-                  style={styles.productWrapper}
-                >
-                  <ProductCard
-                    product={product}
-                    onAdd={handleAddProduct}
-                    onFavorite={handleFavorite}
-                  />
-                </View>
-
-              ))}
-
-            </View>
-
-          )}
-
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.categoryList}
+        >
+          {categories.map((category) => (
+            <CategoryCard
+              key={category.id}
+              category={category}
+              onPress={handleCategoryPress}
+            />
+          ))}
         </ScrollView>
 
-      </View>
+
+        {/* Products */}
+        <View style={styles.sectionHeader}>
+
+          <Text style={styles.sectionTitle}>
+            Popular Products
+          </Text>
+
+          <Pressable>
+            <Text style={styles.seeAll}>
+              See all
+            </Text>
+          </Pressable>
+
+        </View>
+
+
+        {filteredProducts.length === 0 ? (
+
+          <View style={styles.empty}>
+            <Ionicons
+              name="search-outline"
+              size={35}
+              color="#89918B"
+            />
+
+            <Text style={styles.emptyText}>
+              No products found
+            </Text>
+          </View>
+
+        ) : (
+
+          <View style={styles.productGrid}>
+
+            {filteredProducts.map((product) => (
+
+              <View
+                key={product.id}
+                style={styles.productWrapper}
+              >
+                <ProductCard
+                  product={product}
+                  onAdd={handleAddProduct}
+                  onFavorite={handleFavorite}
+                  onPress={(selectedProduct) =>
+                    navigation.navigate("ProductDetails", {
+                      product: selectedProduct,
+                    })
+                  }
+                />
+              </View>
+
+            ))}
+
+          </View>
+
+        )}
+
+      </ScrollView>
+
+    </View>
 
   );
 }

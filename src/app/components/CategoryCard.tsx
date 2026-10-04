@@ -7,20 +7,18 @@ import {
   StyleSheet,
 } from "react-native";
 
+import { CategoryCardProps } from "../navigation/types";
 
-type CategoryCardProps = {
-  category: {
-    id: string;
-    name: string;
-    image: string;
-  };
-  onPress?: (category: any) => void;
+
+type CategoryCard = {
+  category: CategoryCardProps;
+  onPress?: (category: CategoryCardProps) => void;
 };
 
 export default function CategoryCard({
   category,
   onPress,
-}: CategoryCardProps) {
+}: CategoryCard) {
   return (
     <Pressable
       style={styles.container}

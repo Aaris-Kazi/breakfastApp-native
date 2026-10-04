@@ -57,9 +57,9 @@ Join our community of developers creating universal apps.
 
 
 ## building
+   npx @react-native-community/cli init
    npx react-native start 
 
-   npx @react-native-community/cli init
 
    cd android
    ./gradlew assembleRelease
