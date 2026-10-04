@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
     View,
     Text,
@@ -9,9 +9,14 @@ import {
     Alert,
 } from "react-native";
 
-import { Ionicons } from "@react-native-vector-icons/ionicons/static";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { AppStackParamList } from "../../navigation/types";
+
+import { faArrowLeft, faPlus, faMinus, faHeart as fh } from '@fortawesome/free-solid-svg-icons/';
+import { faHeart } from '@fortawesome/free-regular-svg-icons/';
+
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 
 type ProductDetailsProps = NativeStackScreenProps<AppStackParamList, "ProductDetails">;
 
@@ -50,20 +55,20 @@ export default function ProductPage({ navigation, route }: ProductDetailsProps) 
                     style={styles.headerButton}
                     onPress={() => navigation.goBack()}
                 >
-                    <Ionicons
+                    <FontAwesomeIcon icon={faArrowLeft} size={22}
+                        color="#18211C" />
+                    {/* <Ionicons
                         name="arrow-back"
                         size={22}
                         color="#18211C"
-                    />
+                    /> */}
                 </Pressable>
 
                 <Pressable
                     style={styles.headerButton}
                     onPress={() => setFavorite(!favorite)}
                 >
-                    <Ionicons
-                        name={favorite ? "heart" : "heart-outline"}
-                        size={23}
+                    <FontAwesomeIcon icon={favorite ? fh : faHeart} size={23}
                         color={favorite ? "#B94A48" : "#18211C"}
                     />
                 </Pressable>
@@ -100,9 +105,7 @@ export default function ProductPage({ navigation, route }: ProductDetailsProps) 
                     style={styles.quantityButton}
                     onPress={decreaseQuantity}
                 >
-                    <Ionicons
-                        name="remove"
-                        size={18}
+                    <FontAwesomeIcon icon={faMinus} size={18}
                         color="#18211C"
                     />
                 </Pressable>
@@ -115,9 +118,7 @@ export default function ProductPage({ navigation, route }: ProductDetailsProps) 
                     style={styles.quantityButton}
                     onPress={increaseQuantity}
                 >
-                    <Ionicons
-                        name="add"
-                        size={18}
+                    <FontAwesomeIcon icon={faPlus} size={18}
                         color="#18211C"
                     />
                 </Pressable>
