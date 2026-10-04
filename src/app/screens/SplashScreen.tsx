@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import Leaf from '../components/SVGs/Leaf'
-import type { AppStackParamList } from '../navigation/types'
+import type { AppStackParamList } from '../../navigation/types'
 
 type SplashScreenProps = NativeStackScreenProps<AppStackParamList, 'Splash'>
 

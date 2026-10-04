@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 
-import { CategoryCardProps } from "../navigation/types";
+import type { CategoryCardProps } from "../../navigation/types";
 
 
 type CategoryCard = {

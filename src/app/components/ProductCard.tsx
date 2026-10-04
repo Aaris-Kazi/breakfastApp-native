@@ -11,7 +11,7 @@ import { faPlus, faHeart as fh } from '@fortawesome/free-solid-svg-icons/';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons/';
 import { useState } from "react";
-import { ProductCardProps } from "../navigation/types";
+import type { ProductCardProps } from "../../navigation/types";
 
 
 function toggle(onFavorite?: (product: any) => void, product?: any, favorite?: boolean) {

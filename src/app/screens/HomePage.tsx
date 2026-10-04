@@ -21,7 +21,7 @@ import {
 import CategoryCard from "../components/CategoryCard";
 import LocationHeader from "../components/LocationHeaders";
 import SearchBar from "../components/SearchBar";
-import type { AppStackParamList, CategoryCardProps, ProductProps } from "../navigation/types";
+import type { AppStackParamList, CategoryCardProps, ProductProps } from "../../navigation/types";
 
 type HomeScreenProps = NativeStackScreenProps<AppStackParamList, "home">;
 

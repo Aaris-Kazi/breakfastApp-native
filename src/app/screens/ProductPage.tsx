@@ -11,7 +11,7 @@ import {
 
 import { Ionicons } from "@react-native-vector-icons/ionicons/static";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import type { AppStackParamList } from "../navigation/types";
+import type { AppStackParamList } from "../../navigation/types";
 
 type ProductDetailsProps = NativeStackScreenProps<AppStackParamList, "ProductDetails">;
 
